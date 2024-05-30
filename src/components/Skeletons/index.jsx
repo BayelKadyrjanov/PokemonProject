@@ -1,15 +1,14 @@
-import { Skeleton } from "@mui/material";
-import { Container } from "@mui/system";
 import React from "react";
 
 export const Skeletons = () => {
   return (
-    <Container maxWidth={false}>
-      <Skeleton variant="rounded" width="100%" height={250} sx={{ marginBottom: "1em" }} />
-      <Skeleton variant="rounded" width="100%" height={250} sx={{ marginBottom: "1em" }} />
-      <Skeleton variant="rounded" width="100%" height={250} sx={{ marginBottom: "1em" }} />
-      <Skeleton variant="rounded" width="100%" height={250} sx={{ marginBottom: "1em" }} />
-      <Skeleton variant="rounded" width="100%" height={250} sx={{ marginBottom: "1em" }} />
-    </Container>
+    <div className="w-full">
+      {[...Array(5)].map((_, index) => (
+        <div
+          key={index}
+          className="w-full h-64 bg-gray-300 rounded mb-4 animate-pulse"
+        ></div>
+      ))}
+    </div>
   );
 };

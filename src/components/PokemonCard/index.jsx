@@ -1,27 +1,26 @@
 import * as React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import { Box, CardActionArea } from "@mui/material";
 import { typeHandler } from "../../utils";
 
 export default function PokemonCard({ name, image, types }) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
-        <CardMedia component="img" height="200" image={image} alt="green iguana" />
-        <CardContent>
-          <Box display="flex" justifyContent="space-between" alignItems="center">
-            <Typography gutterBottom variant="h5" component="div">
+    <div className="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden">
+      <div className="hover:shadow-2xl transition-shadow duration-300 ease-in-out">
+        <img
+          className="w-full h-48 object-cover"
+          src={image}
+          alt={name}
+        />
+        <div className="p-4">
+          <div className="flex justify-between items-center">
+            <h5 className="text-lg font-bold text-gray-900">
               {name}
-            </Typography>
-            <Typography gutterBottom variant="caption" component="div">
+            </h5>
+            <span className="text-sm text-gray-500">
               {typeHandler(types)}
-            </Typography>
-          </Box>
-        </CardContent>
-      </CardActionArea>
-    </Card>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

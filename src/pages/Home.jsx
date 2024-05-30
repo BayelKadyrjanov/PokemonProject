@@ -1,8 +1,6 @@
-import { Box, Grid } from "@mui/material";
-import { Container } from "@mui/system";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import PokemonCard from "../components/PokemonCard";
 import { Skeletons } from "../components/Skeletons";
@@ -16,25 +14,22 @@ export const Home = ({ setPokemonData }) => {
   }, []);
 
   const getPokemons = () => {
-    var endpoints = [];
-    for (var i = 1; i < 200; i++) {
+    const endpoints = [];
+    for (let i = 1; i < 200; i++) {
       endpoints.push(`https://pokeapi.co/api/v2/pokemon/${i}/`);
     }
     axios.all(endpoints.map((endpoint) => axios.get(endpoint))).then((res) => setPokemons(res));
   };
 
   const pokemonFilter = (name) => {
-    var filteredPokemons = [];
     if (name === "") {
       getPokemons();
+    } else {
+      const filteredPokemons = pokemons.filter((pokemon) =>
+        pokemon.data.name.includes(name)
+      );
+      setPokemons(filteredPokemons);
     }
-    for (var i in pokemons) {
-      if (pokemons[i].data.name.includes(name)) {
-        filteredPokemons.push(pokemons[i]);
-      }
-    }
-
-    setPokemons(filteredPokemons);
   };
 
   const pokemonPickHandler = (pokemonData) => {
@@ -45,21 +40,27 @@ export const Home = ({ setPokemonData }) => {
   return (
     <div>
       <Navbar pokemonFilter={pokemonFilter} />
-      <Container maxWidth={false}>
-        <Grid container spacing={3}>
+      <div className="max-w-full mx-auto px-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {pokemons.length === 0 ? (
             <Skeletons />
           ) : (
             pokemons.map((pokemon, key) => (
-              <Grid item xs={12} sm={6} md={4} lg={2} key={key}>
-                <Box onClick={() => pokemonPickHandler(pokemon.data)}>
-                  <PokemonCard name={pokemon.data.name} image={pokemon.data.sprites.front_default} types={pokemon.data.types} />
-                </Box>
-              </Grid>
+              <div
+                key={key}
+                className="cursor-pointer"
+                onClick={() => pokemonPickHandler(pokemon.data)}
+              >
+                <PokemonCard
+                  name={pokemon.data.name}
+                  image={pokemon.data.sprites.front_default}
+                  types={pokemon.data.types}
+                />
+              </div>
             ))
           )}
-        </Grid>
-      </Container>
+        </div>
+      </div>
     </div>
   );
 };

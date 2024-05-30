@@ -1,5 +1,3 @@
-import { Chip, Container, Divider, Paper, Typography } from "@mui/material";
-import { Box } from "@mui/system";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
@@ -13,7 +11,7 @@ export const Profile = ({ pokemonData }) => {
     if (!pokemonData) {
       navigate("/");
     }
-  }, []);
+  }, [pokemonData, navigate]);
 
   if (!pokemonData) {
     return null;
@@ -22,42 +20,33 @@ export const Profile = ({ pokemonData }) => {
   return (
     <>
       <Navbar hideSearch />
-      <Container maxWidth="md">
-        <Paper elevation={3}>
-          <Box display="flex" flexDirection="column" alignItems="center" p={5}>
-            <Typography variant="h4">{name}</Typography>
-            <Box
-              display="flex"
-              alignItems="center"
-              width="100%"
-              marginBottom="15px"
-              sx={{
-                flexDirection: {
-                  xs: "column",
-                  md: "row",
-                },
-              }}
-            >
-              <Box component="img" src={sprites.front_default} width="50%" height="100%" />
+      <div className="max-w-3xl mx-auto p-4">
+        <div className="bg-white shadow-md rounded-lg p-6">
+          <div className="flex flex-col items-center">
+            <h1 className="text-2xl font-bold mb-4">{name}</h1>
+            <div className="flex flex-col md:flex-row items-center w-full mb-4">
+              <img src={sprites.front_default} className="w-1/2 md:w-1/2 mb-4 md:mb-0" alt={`${name} front`} />
               <PokemonTable pokemonData={pokemonData} />
-            </Box>
-            <Box width="100%">
-              <Divider>bye, bye</Divider>
-              <Box display="flex" justifyContent="space-between">
-                <Box component="img" src={sprites.front_female} width="25%" height="25%" />
-                <Box component="img" src={sprites.front_shiny} width="25%" height="25%" />
-                <Box component="img" src={sprites.front_shiny_female} width="25%" height="25%" />
-              </Box>
-              <Divider>hello</Divider>
-              <Box textAlign="center" marginTop="15px">
+            </div>
+            <div className="w-full">
+              <div className="my-4 border-b-2 text-center">bye, bye</div>
+              <div className="flex justify-between mb-4">
+                <img src={sprites.front_female} className="w-1/4" alt={`${name} front female`} />
+                <img src={sprites.front_shiny} className="w-1/4" alt={`${name} front shiny`} />
+                <img src={sprites.front_shiny_female} className="w-1/4" alt={`${name} front shiny female`} />
+              </div>
+              <div className="my-4 border-b-2 text-center">hello</div>
+              <div className="text-center mt-4">
                 {moves.map((moveData, key) => (
-                  <Chip key={key} sx={{ m: "5px" }} label={moveData.move.name} />
+                  <span key={key} className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                    {moveData.move.name}
+                  </span>
                 ))}
-              </Box>
-            </Box>
-          </Box>
-        </Paper>
-      </Container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
