@@ -29,13 +29,13 @@ export const Profile = ({ pokemonData }) => {
               <PokemonTable pokemonData={pokemonData} />
             </div>
             <div className="w-full">
-              <div className="my-4 border-b-2 text-center">bye, bye</div>
+              <div className="my-4 border-b-2 text-center">Скины</div>
               <div className="flex justify-between mb-4">
                 <img src={sprites.front_female} className="w-1/4" alt={`${name} front female`} />
                 <img src={sprites.front_shiny} className="w-1/4" alt={`${name} front shiny`} />
                 <img src={sprites.front_shiny_female} className="w-1/4" alt={`${name} front shiny female`} />
               </div>
-              <div className="my-4 border-b-2 text-center">hello</div>
+              <div className="my-4 border-b-2 text-center">Навыки</div>
               <div className="text-center mt-4">
                 {moves.map((moveData, key) => (
                   <span key={key} className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">

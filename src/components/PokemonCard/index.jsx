@@ -3,7 +3,7 @@ import { typeHandler } from "../../utils";
 
 export default function PokemonCard({ name, image, types }) {
   return (
-    <div className="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden">
+    <div className="max-w-sm bg-stone-300 shadow-lg border border-green-400 rounded-lg overflow-hidden">
       <div className="hover:shadow-2xl transition-shadow duration-300 ease-in-out">
         <img
           className="w-full h-48 object-cover"

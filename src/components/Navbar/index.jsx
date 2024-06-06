@@ -1,12 +1,14 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
+import { FaSearch } from "react-icons/fa";
+
 
 export default function Navbar({ pokemonFilter, hideSearch }) {
   const navigate = useNavigate();
 
   return (
     <div className="flex flex-grow mb-8">
-      <nav className="w-full bg-black">
+      <nav className="w-full bg-cyan-900">
         <div className="flex justify-between items-center p-4">
           <img
             src="/assets/pokemon-logo.png"
@@ -14,6 +16,9 @@ export default function Navbar({ pokemonFilter, hideSearch }) {
             className="h-12 cursor-pointer"
             onClick={() => navigate("/")}
           />
+          <div>
+            <h1 className="text-2xl text-amber-400 font-semibold">Welcome to Pokemon World</h1>
+          </div>
           {!hideSearch && (
             <div className="relative">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -23,13 +28,13 @@ export default function Navbar({ pokemonFilter, hideSearch }) {
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
-                >
+                ><FaSearch/>
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M8 4a4 4 0 104 4H8a4 4 0 100 8h6a4 4 0 100-8h-4"
-                  ></path>
+                    strokeWidth="1"
+                  >
+                  </path>
                 </svg>
               </div>
               <input
